@@ -29,3 +29,9 @@ Content-Type: application/json
 
 
 GET http://localhost:9999/pessoas?t=C
+###
+
+GET http://localhost:9999/actuator/health
+###
+
+GET http://localhost:30001/actuator/health

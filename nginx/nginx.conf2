@@ -8,11 +8,10 @@ events {
 
 http {
     access_log off;
-    error_log /dev/null emerg;
     upstream api {
-        server localhost:30001;
-        server localhost:30002;
-        keepalive 500;
+        server api01;
+        server api02;
+        keepalive 200;
     }
     server {
         listen 9999;
