@@ -81,7 +81,7 @@ graalvmNative {
             buildArgs.add("--enable-preview")
             buildArgs.add("--verbose")
             buildArgs.add("-g")
-            buildArgs.add("-march=compatibility")
+            buildArgs.add("-march=native")
         }
     }
 }
