@@ -1420,6 +1420,9 @@
   "name":"kotlin.Int"
 },
 {
+  "name":"kotlin.Long"
+},
+{
   "name":"kotlin.Metadata",
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"bv","parameterTypes":[] }, {"name":"d1","parameterTypes":[] }, {"name":"d2","parameterTypes":[] }, {"name":"k","parameterTypes":[] }, {"name":"mv","parameterTypes":[] }, {"name":"pn","parameterTypes":[] }, {"name":"xi","parameterTypes":[] }, {"name":"xs","parameterTypes":[] }]
@@ -1815,6 +1818,10 @@
 },
 {
   "name":"org.springframework.beans.factory.annotation.Qualifier",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.springframework.beans.factory.annotation.Value",
   "queryAllDeclaredMethods":true
 },
 {
@@ -6357,7 +6364,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"client","parameterTypes":["io.r2dbc.pool.ConnectionPool"] }, {"name":"destroy","parameterTypes":[] }, {"name":"pool","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.lang.String","java.lang.String","java.lang.String","int","java.lang.String","java.lang.String","java.lang.String","java.lang.String","long","int","int","java.lang.String"] }, {"name":"client","parameterTypes":["io.r2dbc.pool.ConnectionPool"] }, {"name":"destroy","parameterTypes":[] }, {"name":"pool","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
 },
 {
   "name":"santannaf.customer.rest.entrypoint.config.ConnectionCustom$$SpringCGLIB$$0",
@@ -6365,7 +6372,7 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "fields":[{"name":"CGLIB$FACTORY_DATA"}],
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"CGLIB$SET_STATIC_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }, {"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.lang.String","java.lang.String","java.lang.String","int","java.lang.String","java.lang.String","java.lang.String","java.lang.String","long","int","int","java.lang.String"] }, {"name":"CGLIB$SET_STATIC_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }, {"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
 },
 {
   "name":"santannaf.customer.rest.entrypoint.config.ConnectionCustom$$SpringCGLIB$$FastClass$$0",

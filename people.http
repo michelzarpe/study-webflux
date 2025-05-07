@@ -12,7 +12,7 @@ GET http://localhost:8080/benchmark
 #1c9e2172-e64d-45c5-ad00-0982915bf6fe
 
 ### GET people by ID
-GET http://localhost:8080/pessoas/1313e9de-aabd-4559-9c4f-3c13164b1136
+GET http://localhost:8080/pessoas/cc7fdff3-7805-4338-a717-32b365be079c
 ###
 
 
@@ -20,7 +20,7 @@ POST http://localhost:8080/pessoas
 Content-Type: application/json
 
 {
-    "apelido" : "josé",
+    "apelido" : "josée",
     "nome" : "José Roberto",
     "nascimento" : "2000-10-01",
     "stack" : ["C#", "Node", "Oracle"]
