@@ -2,7 +2,9 @@ package santannaf.customer.rest.entrypoint.handler
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException
 import java.sql.SQLTransientConnectionException
+import java.util.concurrent.TimeoutException
 import org.springframework.dao.DuplicateKeyException
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageConversionException
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -28,5 +30,10 @@ class PeopleHandlerException {
     @ExceptionHandler(PeopleNotFoundException::class)
     fun onPeopleNotFoundException(e: PeopleNotFoundException): ResponseEntity<*> {
         return ResponseEntity.notFound().build<String>()
+    }
+
+    @ExceptionHandler(TimeoutException::class)
+    fun onTimeoutException(e: TimeoutException): ResponseEntity<*> {
+        return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT.value()).build<String>()
     }
 }

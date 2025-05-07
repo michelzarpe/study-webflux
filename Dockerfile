@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN chmod +x ./gradlew && ./gradlew nativeCompile
+RUN chmod +x ./gradlew && ./gradlew clean build && ./gradlew nativeCompile
 
 FROM container-registry.oracle.com/os/oraclelinux:9-slim
 COPY --from=builder /app/rest/build/native/nativeCompile/meuapp /app/meuapp

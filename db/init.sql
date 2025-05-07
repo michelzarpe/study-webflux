@@ -31,7 +31,7 @@ $$;
 --     busca text GENERATED ALWAYS AS ((((((nome)::text || ' '::text) || (apelido)::text) || ' '::text) || (COALESCE(stack, ' '::character varying))::text)) STORED
 -- );
 
-CREATE TABLE IF NOT EXISTS pessoas
+create table if not exists pessoas
 (
     id         uuid not null,
     apelido    text
@@ -48,7 +48,7 @@ create unlogged table if not exists cache
 (
     key  text
         constraint cache_id_pk primary key,
-    data jsonb
+    data uuid
 );
 
 -- CREATE TABLE IF NOT EXISTS pessoas
@@ -62,7 +62,6 @@ create unlogged table if not exists cache
 -- );
 
 create unique index if not exists idx_id_uuid on pessoas (id);
--- create unique index if not exists index_pessoas_on_apelido on pessoas using btree (apelido);
 create index if not exists index_pessoas_on_search on pessoas using gist (busca gist_trgm_ops);
 
 CREATE USER rinhaubr WITH PASSWORD 'rinhaubr';

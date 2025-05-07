@@ -753,7 +753,11 @@
   }, {
     "pattern":"\\Qsantannaf/customer/rest/entrypoint/BenchmarkController.class\\E"
   }, {
+    "pattern":"\\Qsantannaf/customer/rest/entrypoint/PeopleController$Companion.class\\E"
+  }, {
     "pattern":"\\Qsantannaf/customer/rest/entrypoint/PeopleController.class\\E"
+  }, {
+    "pattern":"\\Qsantannaf/customer/rest/entrypoint/config/ConnectionCustom.class\\E"
   }, {
     "pattern":"\\Qsantannaf/customer/rest/entrypoint/handler/PeopleHandlerException.class\\E"
   }, {

@@ -12,7 +12,7 @@ GET http://localhost:8080/benchmark
 #1c9e2172-e64d-45c5-ad00-0982915bf6fe
 
 ### GET people by ID
-GET http://localhost:9999/pessoas/e82b32e8-7931-4d7f-a8c9-787a1446d338
+GET http://localhost:8080/pessoas/1313e9de-aabd-4559-9c4f-3c13164b1136
 ###
 
 
@@ -20,7 +20,7 @@ POST http://localhost:8080/pessoas
 Content-Type: application/json
 
 {
-    "apelido" : "josée",
+    "apelido" : "josé",
     "nome" : "José Roberto",
     "nascimento" : "2000-10-01",
     "stack" : ["C#", "Node", "Oracle"]
@@ -28,7 +28,7 @@ Content-Type: application/json
 ###
 
 
-GET http://localhost:9999/pessoas?t=C
+GET http://localhost:8080/pessoas?t=C
 ###
 
 GET http://localhost:9999/actuator/health

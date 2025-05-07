@@ -6,5 +6,5 @@ import santannaf.core.entity.People
 
 interface SavePeopleProvider {
     fun save(people: People): Mono<People>
-    fun saveInCache(triple: Triple<UUID, String, String>): Mono<UUID>
+    fun saveInCache(triple: Triple<UUID, String, UUID>): Mono<UUID>
 }

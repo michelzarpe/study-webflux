@@ -19,13 +19,11 @@ services:
       retries: 20
       start_period: 10s
     network_mode: host
-#    ports:
-#      - "5432:5432"
     deploy:
       resources:
         limits:
-          cpus: '0.70'
-          memory: '1600MB'
+          cpus: '0.60'
+          memory: '1800MB'
 
 #  pgadmin:
 #    image: dpage/pgadmin4
@@ -46,23 +44,21 @@ services:
       - SERVER_HTTP_CONN_TIMEOUT=500
       - SERVER_SCHEDULING_THREAD_POOL_SIZE=5
       - PORT=30001
-      - DB_POOL_INITIAL_SIZE=5
-      - DB_POOL_MAX_SIZE=5
+      - DB_POOL_INITIAL_SIZE=10
+      - DB_POOL_MAX_SIZE=10
       - DB_POOL_MAX_LIFETIME=2000000
       - DB_HOST=localhost
       - DB_DATABASE=rinha
       - DB_USER=rinha
       - DB_PASSWORD=rinha
     network_mode: host
-#    expose:
-#      - "80"
     depends_on:
       - postgres
     deploy:
       resources:
         limits:
-          cpus: "0.35"
-          memory: 500MB
+          cpus: "0.40"
+          memory: 400MB
 
   api02:
     <<: *api
@@ -73,15 +69,13 @@ services:
       - SERVER_HTTP_CONN_TIMEOUT=500
       - SERVER_SCHEDULING_THREAD_POOL_SIZE=5
       - PORT=30002
-      - DB_POOL_INITIAL_SIZE=15
-      - DB_POOL_MAX_SIZE=15
+      - DB_POOL_INITIAL_SIZE=10
+      - DB_POOL_MAX_SIZE=10
       - DB_POOL_MAX_LIFETIME=2000000
       - DB_HOST=localhost
       - DB_DATABASE=rinha
       - DB_USER=rinha
       - DB_PASSWORD=rinha
-#    expose:
-#      - "80"
 
   nginx:
     image: nginx:latest
@@ -101,15 +95,8 @@ services:
     network_mode: host
     expose:
       - 9999
-#    ports:
-#      - "9999:9999"
     deploy:
       resources:
         limits:
           cpus: "0.10"
           memory: 400MB
-
-#networks:
-#  default:
-#    driver: bridge
-#    name: rinha

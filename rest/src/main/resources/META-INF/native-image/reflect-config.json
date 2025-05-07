@@ -944,7 +944,8 @@
   "name":"jakarta.annotation.PostConstruct"
 },
 {
-  "name":"jakarta.annotation.PreDestroy"
+  "name":"jakarta.annotation.PreDestroy",
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"jakarta.annotation.Resource"
@@ -1309,6 +1310,9 @@
   "name":"java.util.concurrent.ThreadPoolExecutor$Worker"
 },
 {
+  "name":"java.util.concurrent.TimeoutException"
+},
+{
   "name":"java.util.concurrent.atomic.AtomicBoolean",
   "fields":[{"name":"value"}]
 },
@@ -1430,6 +1434,9 @@
 },
 {
   "name":"kotlin.String"
+},
+{
+  "name":"kotlin.Unit"
 },
 {
   "name":"kotlin.annotation.AnnotationRetention"
@@ -4729,6 +4736,11 @@
   "queryAllDeclaredMethods":true
 },
 {
+  "name":"org.springframework.context.annotation.ConfigurationClassEnhancer$EnhancedConfiguration",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true
+},
+{
   "name":"org.springframework.context.annotation.ConfigurationClassParser$DefaultDeferredImportSelectorGroup",
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -6111,6 +6123,10 @@
   "fields":[{"name":"lockedAt"}, {"name":"wip"}]
 },
 {
+  "name":"reactor.core.publisher.StrictSubscriber",
+  "fields":[{"name":"error"}, {"name":"requested"}, {"name":"s"}, {"name":"wip"}]
+},
+{
   "name":"reactor.core.scheduler.BoundedElasticThreadPerTaskScheduler",
   "fields":[{"name":"state"}]
 },
@@ -6247,7 +6263,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["org.springframework.data.r2dbc.core.R2dbcEntityTemplate","io.micrometer.observation.ObservationRegistry"] }, {"name":"fetchById","parameterTypes":["java.util.UUID"] }, {"name":"fetchByIdWithObservability","parameterTypes":["java.util.UUID"] }, {"name":"fetchByTerm","parameterTypes":["java.lang.String"] }, {"name":"fetchCacheByKey","parameterTypes":["java.lang.String"] }, {"name":"save","parameterTypes":["santannaf.core.entity.People"] }, {"name":"saveInCache","parameterTypes":["kotlin.Triple"] }]
+  "methods":[{"name":"<init>","parameterTypes":["org.springframework.data.r2dbc.core.R2dbcEntityTemplate","io.micrometer.observation.ObservationRegistry"] }, {"name":"<init>","parameterTypes":["org.springframework.r2dbc.core.DatabaseClient"] }, {"name":"fetchById","parameterTypes":["java.util.UUID"] }, {"name":"fetchByIdWithObservability","parameterTypes":["java.util.UUID"] }, {"name":"fetchByTerm","parameterTypes":["java.lang.String"] }, {"name":"fetchCacheByKey","parameterTypes":["java.lang.String"] }, {"name":"save","parameterTypes":["santannaf.core.entity.People"] }, {"name":"saveInCache","parameterTypes":["kotlin.Triple"] }]
 },
 {
   "name":"santannaf.core.dataprovider.repository.postgres.PeoplePostgresProvider$$SpringCGLIB$$0",
@@ -6332,6 +6348,32 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["santannaf.core.usecase.FetchPeopleUseCase","santannaf.core.usecase.SavePeopleUseCase"] }, {"name":"createPeople","parameterTypes":["santannaf.customer.rest.entrypoint.data.request.PeopleRequest"] }, {"name":"createPeople$default","parameterTypes":["santannaf.customer.rest.entrypoint.PeopleController","santannaf.customer.rest.entrypoint.data.request.PeopleRequest","int","java.lang.Object"] }, {"name":"fetchPeopleById","parameterTypes":["java.util.UUID"] }, {"name":"fetchPeopleById$default","parameterTypes":["santannaf.customer.rest.entrypoint.PeopleController","java.util.UUID","int","java.lang.Object"] }, {"name":"fetchPeopleByTerm","parameterTypes":["java.lang.String"] }, {"name":"fetchPeopleByTerm$default","parameterTypes":["santannaf.customer.rest.entrypoint.PeopleController","java.lang.String","int","java.lang.Object"] }]
+},
+{
+  "name":"santannaf.customer.rest.entrypoint.PeopleController$Companion"
+},
+{
+  "name":"santannaf.customer.rest.entrypoint.config.ConnectionCustom",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"client","parameterTypes":["io.r2dbc.pool.ConnectionPool"] }, {"name":"destroy","parameterTypes":[] }, {"name":"pool","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+},
+{
+  "name":"santannaf.customer.rest.entrypoint.config.ConnectionCustom$$SpringCGLIB$$0",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "fields":[{"name":"CGLIB$FACTORY_DATA"}],
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"CGLIB$SET_STATIC_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }, {"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
+},
+{
+  "name":"santannaf.customer.rest.entrypoint.config.ConnectionCustom$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"santannaf.customer.rest.entrypoint.config.ConnectionCustom$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
   "name":"santannaf.customer.rest.entrypoint.data.request.PeopleRequest",

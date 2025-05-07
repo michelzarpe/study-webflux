@@ -1,14 +1,10 @@
 package santannaf.core.dataprovider.repository.postgres
 
-import io.micrometer.observation.Observation
-import io.micrometer.observation.ObservationRegistry
 import io.r2dbc.spi.Row
 import io.r2dbc.spi.RowMetadata
-import java.time.LocalDate
 import java.util.UUID
-import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
+import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Repository
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import santannaf.core.entity.People
 import santannaf.core.provider.FetchCachePeopleProvider
@@ -17,22 +13,10 @@ import santannaf.core.provider.SavePeopleProvider
 
 @Repository
 class PeoplePostgresProvider(
-    private val template: R2dbcEntityTemplate,
-    private val observationRegistry: ObservationRegistry
+    private val client: DatabaseClient
 ) : FetchPeopleProvider, FetchCachePeopleProvider, SavePeopleProvider {
-
-    private fun buildPeople(row: Row): People {
-        return People(
-            id = row["id"] as UUID,
-            nickname = row["apelido"] as String,
-            name = row["nome"] as String,
-            birthday = row["nascimento"] as LocalDate,
-            stack = (row["stack"] as? Array<*>)?.filterIsInstance<String>()?.toTypedArray() ?: emptyArray()
-        )
-    }
-
     override fun save(people: People): Mono<People> {
-        return template.databaseClient
+        return client
             .sql("insert into pessoas (id,apelido,nome,nascimento,stack,busca) values (:id,:nickname,:name,:birthday,:stack,:search)")
             .bindValues(
                 mapOf(
@@ -49,69 +33,33 @@ class PeoplePostgresProvider(
             .thenReturn(people)
     }
 
-    override fun saveInCache(triple: Triple<UUID, String, String>): Mono<UUID> {
-        return template.databaseClient.sql("insert into cache (key,data) values (:key,:data::jsonb) on conflict (key) do update set data = :data::jsonb")
-            .bind("key", triple.second)
-            .bind("data", triple.third)
+    override fun saveInCache(pair: Triple<UUID, String, UUID>): Mono<UUID> {
+        return client.sql("insert into cache (key,data) values (:key,:data) on conflict (key) do update set data = :data")
+            .bind("key", pair.second)
+            .bind("data", pair.third)
             .fetch()
             .rowsUpdated()
-            .thenReturn(triple.first)
+            .thenReturn(pair.first)
     }
 
-    override fun fetchById(id: UUID): Mono<People> {
-        return template.databaseClient.sql("select id, apelido, nome, nascimento, stack from pessoas where id = :id")
+    override fun fetchById(id: UUID): Mono<UUID> {
+        return client.sql("select id from pessoas where id = :id")
             .bind("id", id)
-            .map { row: Row, _: RowMetadata -> buildPeople(row) }
+            .map { row: Row, _: RowMetadata -> row["id"] as UUID }
             .one()
     }
 
-    override fun fetchByTerm(q: String): Flux<Int?> {
-        return template.databaseClient.sql("select 1 from pessoas where busca ilike :q limit 50")
+    override fun fetchByTerm(q: String): Mono<UUID> {
+        return client.sql("select id from pessoas where busca ilike :q limit 1")
             .bind("q", q)
-            .map { row: Row, _: RowMetadata -> row.get(0, Int::class.java) }
-            .all()
-    }
-
-    override fun fetchByIdWithObservability(id: UUID): Mono<People> {
-        val query =
-            "select id, apelido as nickname, nome as name, nascimento as birthday, stack from pessoas where id = :id"
-        return observeMono(
-            observationRegistry = observationRegistry,
-            query = query,
-            highCardinalityTags = mapOf("id" to id.toString())
-        ) {
-            fetchById(id)
-        }
-    }
-
-    override fun fetchCacheByKey(key: String): Mono<String> {
-        return template.databaseClient.sql("select data from cache where key = :key")
-            .bind("key", key)
-            .mapValue(String::class.java)
+            .map { row: Row, _: RowMetadata ->  row["id"] as UUID  }
             .one()
     }
 
-    private fun <T> observeMono(
-        observationRegistry: ObservationRegistry,
-        name: String = "r2dbc.query",
-        query: String,
-        highCardinalityTags: Map<String, String> = emptyMap(),
-        monoSupplier: () -> Mono<T>
-    ): Mono<T> {
-        return Mono.defer {
-            val observation = Observation
-                .createNotStarted(name, observationRegistry)
-                .apply {
-                    highCardinalityTags.forEach { (k, v) -> highCardinalityKeyValue(k, v) }
-                    lowCardinalityKeyValue("query", query)
-                }
-
-            val scope = observation.openScope()
-            observation.start()
-
-            monoSupplier()
-                .doOnSuccess { observation.stop(); scope.close() }
-                .doOnError { e -> observation.error(e); observation.stop(); scope.close() }
-        }
+    override fun fetchCacheByKey(key: String): Mono<UUID> {
+        return client.sql("select data from cache where key = :key")
+            .bind("key", key)
+            .map { row: Row, _: RowMetadata -> row["data"] as UUID }
+            .one()
     }
 }

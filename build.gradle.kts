@@ -71,6 +71,7 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
         runtimeOnly("org.postgresql:postgresql")
         runtimeOnly("org.postgresql:r2dbc-postgresql")
+        implementation("io.r2dbc:r2dbc-pool:1.0.2.RELEASE")
 
         // Unit Tests
         testImplementation("org.springframework.boot:spring-boot-starter-test")
