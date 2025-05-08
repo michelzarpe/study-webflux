@@ -35,6 +35,13 @@ services:
 #    depends_on:
 #      - postgres
 
+# A linha `api01: &api` define um *anchor* chamado `api` no YAML.
+# Isso significa que a configuração do serviço `api01` pode ser reutilizada em outros lugares do arquivo usando a referência `<<: *api`.
+# No caso, o serviço `api02` reutiliza a configuração de `api01` (definida pelo *anchor* `&api`)
+# e sobrescreve apenas os valores necessários, como o `hostname`, `container_name` e a porta (`PORT`).
+# Isso evita duplicação de código e facilita a manutenção.
+
+
   api01: &api
     image: thalessantanna/customer:latest
     hostname: api01
